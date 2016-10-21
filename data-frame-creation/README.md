@@ -2,7 +2,7 @@
 
 ###Prepare your data
 
-For this utility to work your csv file should contain a headers row, first row, with the following format:
+For this utility to work your csv file should contain headers, first row, with the following format:
 
     <name>:<type>
     example 1:
@@ -61,13 +61,13 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         myDF: org.apache.spark.sql.DataFrame = [col1: int, col2: int, col3: string]
         
         scala> myDF.show
-        +----+----+----------+
-        |Name|Age |     Score|
-        +----+----+----------+
-        |   1|   2|   Ricardo|
-        |   3|   4|    Jesica|
-        |   5|   6|SomePerson|
-        +----+----+----------+
+        +----------+----+-----+
+        |      Name|Age |Score|
+        +----------+----+-----+
+        |   Ricardo|  31| 84.5|
+        |    Jesica|  30| 99.9|
+        |SomePerson|   6|  0.0|
+        +----------+----+-----+
         
         
         scala> val myDF = dfc.registerAsTempTable(sc, sqlContext, "test.csv", "personas")
@@ -75,10 +75,10 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         
         
         scala> sqlContext.sql("SELECT * FROM personas").show
-        +----+----+----------+
-        |Name|Age |     Score|
-        +----+----+----------+
-        |   1|   2|   Ricardo|
-        |   3|   4|    Jesica|
-        |   5|   6|SomePerson|
-        +----+----+----------+
+        +----------+----+-----+
+        |      Name|Age |Score|
+        +----------+----+-----+
+        |   Ricardo|  31| 84.5|
+        |    Jesica|  30| 99.9|
+        |SomePerson|   6|  0.0|
+        +----------+----+-----+
