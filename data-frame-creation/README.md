@@ -74,16 +74,16 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         import org.sparkshell.utils.{DataFrameCreation=>dfc}
         
         scala> val myDF = dfc.getDataFrame(sc, sqlContext, "test.csv")
-        myDF: org.apache.spark.sql.DataFrame = [col1: int, col2: int, col3: string]
+        myDF: org.apache.spark.sql.DataFrame = [Name: string, Age: int, Score: double]
         
         scala> myDF.show
-        +----+----+----------+
-        |Name|Age |     Score|
-        +----+----+----------+
-        |   1|   2|   Ricardo|
-        |   3|   4|    Jesica|
-        |   5|   6|SomePerson|
-        +----+----+----------+
+        +----------+----+-----+
+        |      Name|Age |Score|
+        +----------+----+-----+
+        |   Ricardo|  31| 84.5|
+        |    Jesica|  30| 99.9|
+        |SomePerson|   6|  0.0|
+        +----------+----+-----+
         
         
         scala> val myDF = dfc.registerAsTempTable(sc, sqlContext, "test.csv", "personas")
@@ -91,10 +91,10 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         
         
         scala> sqlContext.sql("SELECT * FROM personas").show
-        +----+----+----------+
-        |Name|Age |     Score|
-        +----+----+----------+
-        |   1|   2|   Ricardo|
-        |   3|   4|    Jesica|
-        |   5|   6|SomePerson|
-        +----+----+----------+
+        +----------+----+-----+
+        |      Name|Age |Score|
+        +----------+----+-----+
+        |   Ricardo|  31| 84.5|
+        |    Jesica|  30| 99.9|
+        |SomePerson|   6|  0.0|
+        +----------+----+-----+
