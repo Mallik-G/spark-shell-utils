@@ -1,9 +1,9 @@
-package org.sparkshell.utils
+package org.sparkshellutils.DataFrame
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SQLContext
+import org.apache.spark.{SparkConf, SparkContext}
 
-object DataFrameCreationUtils {
+object DataFrameCreationApplication {
 
   def main(args: Array[String]) {
     val sparkConf: SparkConf = new SparkConf().setAppName("Data Frame Creation Util")

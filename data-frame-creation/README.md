@@ -1,8 +1,22 @@
-#Data Frame Creation Util
+#Data Frame Creation Utility
 
-###Prepare your data
+## Motivation
 
-For this utility to work your csv file should contain a headers row, first row, with the following format:
+This project has been created with the intention of help people exploring CSV files with Spark using Scala code.
+
+Users can now save time creating data frames based on their CSV files and go straight to execute SQL queries, analyze
+data, aggregation, etc. 
+
+If users are planning to use the same data frame for different sessions they can now save CSV file as parquet in a 
+given location and don't have to re-create a data frame every time. 
+
+## Using Data Frame Creation Utility
+
+###Prepare your CSV file
+
+Open your CSV file and append the desired data type for each column name. Make sure the values are compatible and can be 
+casted to the given data type. 
+Each column should contain name, colon and data type as shown below:
 
     <name>:<type>
     example 1:
@@ -14,14 +28,16 @@ For this utility to work your csv file should contain a headers row, first row, 
     example 4:
     columnName:Float
     
-Given that, headers should look like:
+This is an example of how your CSV file should look like:
 
     Name:String,Age:Int,Score:Double
     Ricardo,31,84.5
     Jesica,30,99.9
     Seymour,6,0.0
+    
+For now the supported data types are String, Int, Double and Float.
 
-###Run DataFrameCreationUtils
+###Run DataFrameCreationApplication
 
 Run application mode with spark-submit and get your csv file saved as parquet either locally or in cluster (HDFS).
 
