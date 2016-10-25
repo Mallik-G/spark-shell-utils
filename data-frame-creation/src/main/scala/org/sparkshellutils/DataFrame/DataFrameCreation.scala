@@ -4,6 +4,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{DataFrame, Row, SQLContext, SaveMode}
+import org.apache.spark.sql.hive.HiveContext
 
 /**
   * Contains routines to either create a new data frame upload data in parquet format to HDFS or register as temporal table.
@@ -62,6 +63,26 @@ object DataFrameCreation {
     val dataFrame = createDataFrame(sparkContext, sQLContext, input)
 
     dataFrame.registerTempTable(tableName)
+  }
+
+  /**
+    * Creates a new table in default database in Hive.
+    * @param sparkContext application spark context
+    * @param sQLContext application sql context
+    * @param input input path. If running in cluster should be a HDFS folder else a local path
+    * @param tableName hive table name
+    */
+  def saveAsHiveTable(sparkContext: SparkContext,
+                      sQLContext: SQLContext,
+                      input: String,
+                      tableName: String): Unit ={
+
+    val hiveContext = new HiveContext(sparkContext)
+
+    val dataFrame = createDataFrame(sparkContext, sQLContext, input)
+    val hiveDataFrame = hiveContext.createDataFrame(dataFrame.rdd, dataFrame.schema)
+    hiveDataFrame.write.mode(SaveMode.Overwrite).saveAsTable(tableName)
+
   }
 
   private def createDataFrame(sparkContext: SparkContext, sQLContext: SQLContext, input: String): DataFrame ={

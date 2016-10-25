@@ -16,7 +16,12 @@ object DataFrameCreationApplication {
       val input = args(0)
       val output = args(1)
       DataFrameCreation.saveDataFrame(sparkContext, sQLContext, input, output)
-    } else println("I don't understand what you are doing.")
+    } else if(args.length == 3 && args(2) == "hive") {
+      val input = args(0)
+      val tableName = args(1)
+      DataFrameCreation.saveAsHiveTable(sparkContext, sQLContext, input, tableName)
+    }
+    else println("I don't understand what you are doing.")
   }
 
 }
