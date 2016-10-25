@@ -39,13 +39,21 @@ For now the supported data types are String, Int, Double and Float.
 
 ###Run DataFrameCreationApplication
 
-Run application mode with spark-submit and get your csv file saved as parquet either locally or in cluster (HDFS).
+Run application mode with spark-submit and get your CSV file saved as parquet either locally or in cluster (HDFS).
 
         > spark-submit --class "org.sparkshell.utils.DataFrameCreationUtils" \
             target/scala-2.10/data-frame-creation_2.10-1.0.jar \
             <input folder HDFS or local> \
             <output folder HDFS or local>
     
+Add a third parameter "hive" to save your CSV content as Hive table.
+                
+        > spark-submit --class "org.sparkshell.utils.DataFrameCreationUtils" \
+            target/scala-2.10/data-frame-creation_2.10-1.0.jar \
+            <input folder HDFS or local> \
+            <table name> \
+            hive
+
     
 ###Run DataFrameCreation
 
