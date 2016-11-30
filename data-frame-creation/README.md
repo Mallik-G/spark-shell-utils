@@ -78,8 +78,8 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         Spark context available as sc.
         SQL context available as sqlContext.
         
-        scala> import org.sparkshell.utils.{DataFrameCreation => dfc}
-        import org.sparkshell.utils.{DataFrameCreation=>dfc}
+        scala> import org.sparkshellutils.DataFrame.{DataFrameCreation => dfc}
+        import org.sparkshellutils.DataFrame.{DataFrameCreation=>dfc}
         
         scala> val myDF = dfc.getDataFrame(sc, sqlContext, "test.csv")
         myDF: org.apache.spark.sql.DataFrame = [Name: string, Age: int, Score: double]
