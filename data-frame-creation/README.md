@@ -41,14 +41,14 @@ For now the supported data types are String, Int, Double and Float.
 
 Run application mode with spark-submit and get your CSV file saved as parquet either locally or in cluster (HDFS).
 
-        > spark-submit --class "org.sparkshell.utils.DataFrameCreationUtils" \
+        > spark-submit --class "org.sparkshellutils.DataFrame.DataFrameCreationApplication" \
             target/scala-2.10/data-frame-creation_2.10-1.0.jar \
             <input folder HDFS or local> \
             <output folder HDFS or local>
     
 Add a third parameter "hive" to save your CSV content as Hive table.
                 
-        > spark-submit --class "org.sparkshell.utils.DataFrameCreationUtils" \
+        > spark-submit --class "org.sparkshellutils.DataFrame.DataFrameCreationApplication" \
             target/scala-2.10/data-frame-creation_2.10-1.0.jar \
             <input folder HDFS or local> \
             <table name> \
@@ -78,8 +78,8 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         Spark context available as sc.
         SQL context available as sqlContext.
         
-        scala> import org.sparkshell.utils.{DataFrameCreation => dfc}
-        import org.sparkshell.utils.{DataFrameCreation=>dfc}
+        scala> import org.sparkshellutils.DataFrame.{DataFrameCreation => dfc}
+        import org.sparkshellutils.DataFrame.{DataFrameCreation=>dfc}
         
         scala> val myDF = dfc.getDataFrame(sc, sqlContext, "test.csv")
         myDF: org.apache.spark.sql.DataFrame = [Name: string, Age: int, Score: double]
