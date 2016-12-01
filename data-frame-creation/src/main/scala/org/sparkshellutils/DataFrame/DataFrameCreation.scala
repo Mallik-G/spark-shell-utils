@@ -110,12 +110,16 @@ object DataFrameCreation {
 
     return for ((column, i) <- row.zipWithIndex) yield {
       val columnType: Option[String] = columnIndexType.get(i)
-      columnType match {
-        case STRING_TYPE=> column
-        case INT_TYPE => column.toInt
-        case DOUBLE_TYPE => column.toDouble
-        case FLOAT_TYPE => column.toFloat
-        case _ => column
+      if(column == ""){
+        null
+      } else {
+        columnType match {
+          case STRING_TYPE=> column
+          case INT_TYPE => column.toInt
+          case DOUBLE_TYPE => column.toDouble
+          case FLOAT_TYPE => column.toFloat
+          case _ => column
+        }
       }
     }
   }
@@ -124,13 +128,13 @@ object DataFrameCreation {
     val columnDescription = column.split(":")
 
     if (columnDescription.length > 1) {
-      val columnName = columnDescription(0)
-      val columnType = columnDescription(1)
+      val columnName = columnDescription(0).trim
+      val columnType = columnDescription(1).trim
       columnType match {
-        case "String" => return StructField(columnName, StringType)
-        case "Int" => return StructField(columnName, IntegerType)
-        case "Double" => return StructField(columnName, DoubleType)
-        case "Float" => return StructField(columnName, FloatType)
+        case "String" => return StructField(columnName, StringType, nullable = true)
+        case "Int" => return StructField(columnName, IntegerType, nullable = true)
+        case "Double" => return StructField(columnName, DoubleType, nullable = true)
+        case "Float" => return StructField(columnName, FloatType, nullable = true)
       }
     }
     else return StructField(columnDescription(0), StringType)
