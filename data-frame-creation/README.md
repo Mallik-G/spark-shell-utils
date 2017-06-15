@@ -1,4 +1,4 @@
-#Data Frame Creation Utility
+# Data Frame Creation Utility
 
 ## Motivation
 
@@ -12,7 +12,7 @@ given location and don't have to re-create a data frame every time.
 
 ## Using Data Frame Creation Utility
 
-###Prepare your CSV file
+### Prepare your CSV file
 
 Open your CSV file and append the desired data type for each column name. Make sure the values are compatible and can be 
 casted to the given data type. 
@@ -37,14 +37,15 @@ This is an example of how your CSV file should look like:
     
 For now the supported data types are String, Int, Double and Float.
 
-###Run DataFrameCreationApplication
+### Run DataFrameCreationApplication
 
 Run application mode with spark-submit and get your CSV file saved as parquet either locally or in cluster (HDFS).
 
         > spark-submit --class "org.sparkshellutils.DataFrame.DataFrameCreationApplication" \
             target/scala-2.10/data-frame-creation_2.10-1.0.jar \
             <input folder HDFS or local> \
-            <output folder HDFS or local>
+            <output folder HDFS or local> \
+            <delimiter>
     
 Add a third parameter "hive" to save your CSV content as Hive table.
                 
@@ -52,10 +53,12 @@ Add a third parameter "hive" to save your CSV content as Hive table.
             target/scala-2.10/data-frame-creation_2.10-1.0.jar \
             <input folder HDFS or local> \
             <table name> \
+            <delimiter> \
             hive
 
+For tab delimiter use $'\t'. 
     
-###Run DataFrameCreation
+### Run DataFrameCreation
 
 Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `registerAsTempTable`
 
@@ -81,7 +84,7 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         scala> import org.sparkshellutils.DataFrame.{DataFrameCreation => dfc}
         import org.sparkshellutils.DataFrame.{DataFrameCreation=>dfc}
         
-        scala> val myDF = dfc.getDataFrame(sc, sqlContext, "test.csv")
+        scala> val myDF = dfc.getDataFrame(sc, sqlContext, "test_comma_delimited.csv", ",")
         myDF: org.apache.spark.sql.DataFrame = [Name: string, Age: int, Score: double]
         
         scala> myDF.show
@@ -94,7 +97,7 @@ Run spark-shell, import DataFrameCreation and invoke `getDataFrame` or `register
         +----------+----+-----+
         
         
-        scala> val myDF = dfc.registerAsTempTable(sc, sqlContext, "test.csv", "personas")
+        scala> val myDF = dfc.registerAsTempTable(sc, sqlContext, "test_tab_delimited.csv", "personas", "\t")
         myDF: Unit = ()
         
         
