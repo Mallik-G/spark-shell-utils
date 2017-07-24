@@ -10,12 +10,11 @@ data, aggregation, etc.
 If users are planning to use the same data frame for different sessions they can now save CSV file as parquet in a 
 given location and don't have to re-create a data frame every time. 
 
-## Using Data Frame Creation Utility
-
 ## Building Data Frame Creation Utility
     > cd data-frame-creation
     > sbt package
 
+## Using Data Frame Creation Utility
 ### Prepare your CSV file
 
 Open your CSV file and append the desired data type for each column name. Make sure the values are compatible and can be 
