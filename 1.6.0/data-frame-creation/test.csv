@@ -1,0 +1,5 @@
+col1:Int,col2:Int,col3:String
+1,2,Ricardo
+3,4,Jesica
+5,6,SomePerson
+5,,Seymour
